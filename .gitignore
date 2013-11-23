@@ -1,36 +1,50 @@
-*.py[cod]
-
-# C extensions
-*.so
+*.pyc
+*.pyo
+*.swp
+*~
+*.komodoproject
 
 # Packages
 *.egg
 *.egg-info
 dist
-build
+build/
 eggs
-parts
 bin
-var
 sdist
-develop-eggs
-.installed.cfg
-lib
-lib64
-__pycache__
+
+#Sphinx builds
+_build
 
 # Installer logs
 pip-log.txt
+
+# Flake8 violation file
+violations.flake8.txt
 
 # Unit test / coverage reports
 .coverage
 .tox
 nosetests.xml
 
-# Translations
-*.mo
+# Sphinx
+docs/_build
 
-# Mr Developer
-.mr.developer.cfg
-.project
-.pydevproject
+# Virtual environments
+env
+env*
+migrations
+migrations*
+
+.webassets-cache
+*.sublime-*
+
+# Databses
+*.db
+*.sqlite
+
+# Uploads Folder
+uploads/
+
+#ipython checkpoints
+.ipynb_checkpoints/

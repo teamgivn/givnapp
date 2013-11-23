@@ -1,0 +1,13 @@
+Flask
+requests
+WTForms
+webassets
+ipython
+ipdb
+python-dateutil
+Flask-Login
+Flask-SQLAlchemy
+Flask-Script
+Flask-Mail
+Flask-WTF
+Flask-Migrate

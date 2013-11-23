@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+    
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <script>
+       window.addEventListener("load",function() {
+         setTimeout(function(){
+          window.scrollTo(0, 0);
+          }, 0);
+       });
+    </script>
+    <style>
+       body { min-height: 480px; }
+    </style>
+
+    {% block meta %}
+        <meta name="description" content="">
+        <meta name="author" content="">
+    {% endblock %}
+  <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='public/css/common.css') }}" />
+    {% block css %} {% endblock %}
+    <title>{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+
+
+<nav class="top-bar" data-options="is_hover:true">
+  <ul class="title-area">
+    <!-- Title Area -->
+      <a href="http://givn.us"><img src="{{ url_for('static', filename='img/givn_us.png') }}" style="margin: 4px 4px 4px;"/></a><br>
+    <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+  </ul>
+
+  <section class="top-bar-section">
+    <!-- Left Nav Section -->
+    <ul class="left">
+    {% if current_user.is_authenticated() %}
+      <li class="divider"></li>
+         <li class="active"><a href="#">OrganizationName</a></li>
+      <li class="divider"></li> 
+         <li class="active"><a href="#">Manage Donations</a></li>
+      <li class="divider"></li>
+    {% endif %}      
+    </ul>
+
+    <!-- Right Nav Section -->
+    <ul class="right">
+      
+      <li class="divider"></li>
+      {% if current_user.is_authenticated() %}
+          <li><a href="{{ url_for('auth.settings', user_id=current_user.id) }}">Account Settings</a></li>  
+      <li class="divider"></li>
+      {% endif %}
+      <li class="divider"></li>
+      <li class="divider show-for-small"></li>
+      <li class="has-form">
+        {% if current_user.is_authenticated() %}
+          <a class="button" href="{{ url_for('auth.logout') }}">Logout</a>
+        {% else %}
+          <a class="button" href="{{ url_for('auth.login') }}">Login</a>
+        {% endif %}
+      </li>    
+    </ul>
+  </section>
+</nav>
+
+<div style="background-color:#FFCC00">
+  <center>  
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <ul>
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+  </center>
+</div>
+
+
+{% block body %}
+
+{% endblock %}
+        
+        <script type="text/javascript" src="{{ url_for('static', filename='public/js/common.js') }}"></script>
+
+{% block js %} {% endblock %}
+    </body>
+
+<footer class="row">
+    <hr/>
+    <div class="large-6 columns">
+      <label>Copyright &copy; 2013  |  <a href="http://www.givn.us" target="_blank">Givn</a>. All Rights Reserved.</label>
+    </div>
+    <div class="large-6 columns">
+      <!--Start Visible up to 768px-->
+      <div class="show-for-small">
+        <ul class="inline-list left">
+          <li><label><a href="http://www.givn.us/terms" target="_blank">Terms &amp; Conditions</a></label></li>
+          <li><label><a href="http://www.givn.us/support" target="_blank">Support</a></li></label>
+      </ul>
+      </div>
+      <!--End Visible up to 768px-->
+      <!--Start Visible from 768px upwards-->
+      <div class="show-for-medium-up">
+        <ul class="inline-list right">
+          <li><label><a href="http://givn.us/terms" target="_blank">Terms &amp; Conditions</a></label></li>
+          <li><label><a href="http://www.givn.us/support" target="_blank">Support</a></li></label>
+        </ul>
+      </div>
+      <!--End Visible from 768px upwards-->
+    </div>
+</footer>
+
+</html>

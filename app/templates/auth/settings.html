@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Account Settings{% endblock %}
+
+{% block body %}
+{% from "forms/macros.html" import edit_field %}
+
+<div class="row">
+    <div class="large-12 columns">
+        <br>
+        <h4>Account Settings</h4>
+        <br>
+     </div>
+</div>
+<form method="POST" action="{{ url_for('auth.settings', user_id=user.id) }}" class="form">
+        {{ form.hidden_tag() }}
+<div class="row">
+     <div class="large-4 columns">
+            {{ form.username.label }}
+            <output type="text" name="title"><label><b>{{ user.username }}</b></label>
+            <br>
+            <h6>Contact Information:</h6>
+            <br>    
+            {{ edit_field(form.name, placeholder="Enter your contact name") }}
+            {{ edit_field(form.email, placeholder="Enter your email address") }}
+            {{ edit_field(form.phone, placeholder="Enter your phone number") }}
+            <br>
+            <h6>Password Information:</h6>
+            <br>
+            {{ edit_field(form.password, placeholder="Enter your password") }}
+            {{ edit_field(form.confirm, placeholder="Re-enter your password") }}
+            <br>
+            <button class="button small" type="submit">Update</button>
+    </div>
+</div>
+</form>
+
+
+{% endblock body %}
+
+
+{% block js %}
+
+
+{% endblock js %}

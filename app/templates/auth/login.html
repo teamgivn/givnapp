@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block body %}
+{% from "forms/macros.html" import edit_field %}
+
+<br>
+<div class="row">
+	<div class="large-5 large-centered small-12 small-centered columns">
+		<fieldset>
+			<h6>Login:</h6>
+			<br>
+			<form method="POST" action="{{ url_for('auth.login') }}" class="form">
+			    {{ form.hidden_tag() }}	        	
+          		{{ edit_field(form.username) }}
+			    {{ edit_field(form.password, placeholder="Enter your password") }}
+			    {{ edit_field(form.rememberme) }}
+			    <button class="button small" type="submit">Login</button>
+			</form>
+			<label>First time user?  Register <a href="{{ url_for('auth.register') }}" >here</a>
+		</fieldset>
+	</div>
+<div>
+{% endblock %}

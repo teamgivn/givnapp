@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block body %}
+{% from "forms/macros.html" import edit_field %}
+
+<br>
+<div class="row">
+<div class="large-4 large-offset-4 columns">
+    <form method="POST" action="{{ url_for('auth.register') }}" class="form">
+        {{ form.hidden_tag() }}
+        {{ edit_field(form.username, placeholder="Enter your desired username") }}
+        {{ edit_field(form.name, placeholder="Enter your contact name") }}
+        {{ edit_field(form.phone, placeholder="Enter your phone number") }}
+        {{ edit_field(form.email, placeholder="Enter your email address") }}
+        {{ edit_field(form.password, placeholder="Enter your password") }}
+        {{ edit_field(form.confirm, placeholder="Re-enter your password") }}
+        {{ edit_field(form.accept_tos) }}
+        <button class="button small" type="submit">Register</button>
+    </form>
+</div>
+</div>
+<br>
+<div id="firstimeuser" class="reveal-modal small">
+	<div class="large-12 columns">
+		<br>
+		<fieldset>
+		   <label>An activation link for <output name="username" value={{ form.username.data }} /> has been sent to <output name="username" value={{ form.email.data }} />. Please check you inbox and follow the link to activate our account and go to your account page.</label>
+		<a class="close-reveal-modal">&#215;</a>
+		</fieldset>
+	</div>
+</div>
+
+
+{% endblock %}
