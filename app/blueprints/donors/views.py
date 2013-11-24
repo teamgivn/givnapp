@@ -59,7 +59,7 @@ def error_handler_413(e):
 @donors.route('/delete/', methods=['POST'])
 @donors.route('/delete/<id>', methods=['POST'])
 @login_required
-def delete_file(id=None):
+def delete(id=None):
     """Delete an uploaded file."""
     donation = db.session.query(Donation).get(id)
     if donor and donation.filename:

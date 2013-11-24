@@ -94,29 +94,29 @@
             <tr>    
                 <th width="150" class="left"><label><b>Thumbnail</b></label></th>
                 <th width="120" class="left"><label><b>Organization</b></label></th>
-                <th width="50" class="left"><label><b>Description</b></label></th>
-                <th width="50" class="left"><label><b>Date</b></label></th>
+                <th width="120" class="left"><label><b>Description</b></label></th>
+                <th width="100" class="left"><label><b>Date</b></label></th>
             </tr>
           </thead>
           <tbody>
             {% for row in donations %}
             <tr>
                 <td width="150" class="left th">
-                    <img src="{{ url_for('donors.uploads', filename=row.filename) }}"/>      
+                    <img src="{{ url_for('donors.uploads', filename=row.filename, _external=True) }}"/>      
                 </td>
                 <td width="120" class="left"><label>{{ row.organization }}</label></th>
-                <td width="50" class="left"><label>{{ row.description }}</label></th>
-                <td width="50" class="left"><label>{{ row.modified|strftime }}</label></th>   
+                <td width="120" class="left"><label>{{ row.description }}</label></th>
+                <td width="100" class="left"><label>{{ row.modified|strftime }}</label></th>   
                 <td class="left">
                     <ul class="inline-list">
                       <li><a href="#" data-reveal-id="PreviewImage" class="small button preview_button"
                             data-id ="{{ row.id }}"
-                            data-title ="{{ row.description }}"
+                            data-description ="{{ row.description }}"
                             data-urlpath ="{{ url_for('donors.uploads', filename=row.filename) }}"
                             data-toggle="modal">Preview</a></li>
                       <li><a href="#" data-reveal-id="DeleteConfirmation" class="small alert button delete_confirmation" 
                             data-id ="{{ row.id }}"
-                            data-title ="{{ row.description }}"
+                            data-description ="{{ row.description }}"
                             data-toggle="modal">Delete</a></li>
                     </ul>
                 </td>
@@ -190,6 +190,22 @@ $(window).load(function() {
         lastSlide: function(){},        // Triggers when last slide is shown
         afterLoad: function(){}         // Triggers when slider has loaded
     });
+});
+
+$(".preview_button").click(function(){
+     var myDonationId = $(this).data('id');
+     $("#image_id1").val(myDonationId);
+     var myDontationDesc = $(this).data('description');
+     $("#image_title1").val(myDontationDesc);
+     var myImageURL = $(this).data('urlpath');
+     $("#image_url").attr("src", myImageURL);
+ });
+
+$(".delete_confirmation").click(function(){
+     var myDonationId = $(this).data('id');
+     var myDontationDesc = $(this).data('description');
+     $("#image_title").val( myDontationDesc );
+    $("#delete_confirm_form").attr("action", "{{ url_for('donors.delete') }}" + myDonationId);
 });
 
 </script>
