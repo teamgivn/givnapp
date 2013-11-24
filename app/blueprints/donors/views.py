@@ -38,7 +38,8 @@ def create():
             filename = secure_filename(file.filename)
             file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
             donation = Donation()
-            form.populate_obj(donation)            
+            form.populate_obj(donation)
+            donation.type = 2            
             donation.filename = filename
             donation.user_id = current_user.id
             db.session.add(donation)
@@ -50,6 +51,14 @@ def create():
 def pledging():
     error = None
     form=PledgingForm()
+    if request.method == 'POST' and form.validate_on_submit():
+        donation = Donation()
+        form.populate_obj(donation)       
+        donation.type = 1     
+        donation.user_id = current_user.id
+        db.session.add(donation)
+        db.session.commit()
+        return redirect(url_for('donors.index'))
     return render_template('donors/pledging.html', form=form, error=error)
 
 @donors.errorhandler(413)

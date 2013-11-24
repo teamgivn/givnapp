@@ -24,6 +24,7 @@ class Donation(Base):
     created = Column(DateTime, default=datetime.now)
     modified = Column(DateTime, default=datetime.now, onupdate=datetime.now)
     user = relationship("User", backref="donations")
+    type = Column(Integer)
 
     def __init__(self):
         pass

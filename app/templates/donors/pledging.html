@@ -15,7 +15,16 @@
         {{ form.hidden_tag() }}             
         {{ edit_field(form.organization) }}
         {{ edit_field(form.description) }}
-        {{ edit_field(form.frequency) }}
+        {{ edit_field(form.frequency, id="pmt_frequency") }}
+    </div>
+</div>
+<div class="row">
+    <div id="cat2" class="large-5 large-centered small-12 small-centered columns">
+            {{ edit_field(form.recurring_number) }}
+    </div>
+</div>
+<div class="row">
+    <div class="large-5 large-centered small-12 small-centered columns">
         {{ edit_field(form.amount) }}
     </div>
 </div>

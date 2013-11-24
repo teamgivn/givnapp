@@ -57,18 +57,14 @@
         <div class="slider-wrapper theme-default">
             <div class="ribbon"></div>
             <div id="slider" class="nivoSlider">
-                <img src="{{ url_for('static', filename='img/slides/grace.png') }}" style="max-width:400px; max-height:275px;" title="#htmlcaption1" alt="" />
                 <a href="http://dev7studios.com">
-                <img src="{{ url_for('static', filename='img/slides/haiyan.png') }}" style="max-width:400px; max-height:275px;" alt="" title="#htmlcaption2" /></a>
-                <img src="{{ url_for('static', filename='img/slides/midwest.png') }}" style="max-width:400px; max-height:275px;" title="#htmlcaption3" alt="" />
+                <img src="{{ url_for('static', filename='img/slides/haiyan.png') }}" style="max-width:400px; max-height:275px;" alt="" title="#htmlcaption1" /></a>
+                <img src="{{ url_for('static', filename='img/slides/midwest.png') }}" style="max-width:400px; max-height:275px;" title="#htmlcaption2" alt="" />
             </div>
             <div id="htmlcaption1" style="display:none">
-                 <div class="nivo-caption1" ></div>
-            </div>
-            <div id="htmlcaption2" style="display:none">
                 <div class="nivo-caption2" ></div>
             </div>
-            <div id="htmlcaption3" style="display:none">
+            <div id="htmlcaption2" style="display:none">
                 <div class="nivo-caption3" ></div>
             </div>
         </div>
@@ -84,11 +80,16 @@
         </ul>
     </div>
 </div>
-
-
-
+<div class="row">
+    <div class="large-12 columns">
+<img src="{{ url_for('static', filename='img/dashboard.png') }}" style="max-width:1034px; max-height:731px;" alt="" />
+    </div>
+</div>
+<br>
+<br>
 <div class="row">   
     <div class="large-12 small-12 columns">
+        <h5>Donations</h5>
         <table>
           <thead>
             <tr>    
@@ -100,6 +101,7 @@
           </thead>
           <tbody>
             {% for row in donations %}
+              {% if row.type == 2 %}   
             <tr>
                 <td width="150" class="left th">
                     <img src="{{ url_for('donors.uploads', filename=row.filename, _external=True) }}"/>      
@@ -121,6 +123,49 @@
                     </ul>
                 </td>
             </tr>
+             {% endif %}
+            {% endfor %}  
+          </tbody>
+        </table>
+    <div>
+</div>
+<div class="row">   
+    <div class="large-12 small-12 columns">
+        <h5>Pledges</h5>
+        <table>
+          <thead>
+            <tr>    
+                <th width="150" class="left"><label><b>Thumbnail</b></label></th>
+                <th width="120" class="left"><label><b>Organization</b></label></th>
+                <th width="120" class="left"><label><b>Description</b></label></th>
+                <th width="100" class="left"><label><b>Date</b></label></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in donations %}
+              {% if row.type == 1 %}   
+            <tr>
+                <td width="150" class="left th">
+                    <img src="{{ url_for('donors.uploads', filename=row.filename, _external=True) }}"/>      
+                </td>
+                <td width="120" class="left"><label>{{ row.organization }}</label></th>
+                <td width="120" class="left"><label>{{ row.description }}</label></th>
+                <td width="100" class="left"><label>{{ row.modified|strftime }}</label></th>   
+                <td class="left">
+                    <ul class="inline-list">
+                      <li><a href="#" data-reveal-id="PreviewImage" class="small button preview_button"
+                            data-id ="{{ row.id }}"
+                            data-description ="{{ row.description }}"
+                            data-urlpath ="{{ url_for('donors.uploads', filename=row.filename) }}"
+                            data-toggle="modal">Preview</a></li>
+                      <li><a href="#" data-reveal-id="DeleteConfirmation" class="small alert button delete_confirmation" 
+                            data-id ="{{ row.id }}"
+                            data-description ="{{ row.description }}"
+                            data-toggle="modal">Delete</a></li>
+                    </ul>
+                </td>
+            </tr>
+             {% endif %}
             {% endfor %}  
           </tbody>
         </table>
