@@ -43,9 +43,9 @@
     <ul class="left">
     {% if current_user.is_authenticated() %}
       <li class="divider"></li>
-         <li class="active"><a href="#">OrganizationName</a></li>
+         <li class="active"><a href="#">{{ current_user.username }}</a></li>
       <li class="divider"></li> 
-         <li class="active"><a href="#">Manage Donations</a></li>
+         <li class="active"><a href="{{ url_for('donors.index') }}">Manage Donations</a></li>
       <li class="divider"></li>
     {% endif %}      
     </ul>
