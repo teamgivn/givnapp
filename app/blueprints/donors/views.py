@@ -20,7 +20,8 @@ donors = Blueprint(
 
 @donors.route('/uploads/<filename>/')
 def uploads(filename):
-    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+    return url_for('static', filename='uploads/' + filename)
+    # return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 @donors.route('/', methods=['GET', 'POST'])
 def index():

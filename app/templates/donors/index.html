@@ -146,17 +146,16 @@
               {% if row.type == 1 %}   
             <tr>
                 <td width="150" class="left th">
-                    <img src="{{ url_for('donors.uploads', filename=row.filename, _external=True) }}"/>      
+                    <img src="{{ url_for('static', filename='uploads/'+row.filename, _external=True) }}"/>      
                 </td>
-                <td width="120" class="left"><label>{{ row.organization }}</label></th>
-                <td width="120" class="left"><label>{{ row.description }}</label></th>
-                <td width="100" class="left"><label>{{ row.modified|strftime }}</label></th>   
+                <td width="120" class="left"><label>{{ row.organization }}</label></td>
+                <td width="120" class="left"><label>{{ row.description }}</label></td>
+                <td width="100" class="left"><label>{{ row.modified|strftime }}</label></td>   
                 <td class="left">
                     <ul class="inline-list">
                       <li><a href="#" data-reveal-id="PreviewImage" class="small button preview_button"
                             data-id ="{{ row.id }}"
                             data-description ="{{ row.description }}"
-                            data-urlpath ="{{ url_for('donors.uploads', filename=row.filename) }}"
                             data-toggle="modal">Preview</a></li>
                       <li><a href="#" data-reveal-id="DeleteConfirmation" class="small alert button delete_confirmation" 
                             data-id ="{{ row.id }}"
@@ -169,7 +168,7 @@
             {% endfor %}  
           </tbody>
         </table>
-    <div>
+    </div> 
 </div>
 
 <div id="PreviewImage" class="modal reveal-modal small modal-body">
@@ -212,7 +211,8 @@
 
 <script>
 
-$(window).load(function() {
+$(function() {
+
     $('#slider').nivoSlider({
         effect: 'fade',               // Specify sets like: 'fold,fade,sliceDown'
         slices: 15,                     // For slice animations
@@ -235,7 +235,6 @@ $(window).load(function() {
         lastSlide: function(){},        // Triggers when last slide is shown
         afterLoad: function(){}         // Triggers when slider has loaded
     });
-});
 
 $(".preview_button").click(function(){
      var myDonationId = $(this).data('id');
@@ -245,12 +244,15 @@ $(".preview_button").click(function(){
      var myImageURL = $(this).data('urlpath');
      $("#image_url").attr("src", myImageURL);
  });
+/*
 
 $(".delete_confirmation").click(function(){
      var myDonationId = $(this).data('id');
      var myDontationDesc = $(this).data('description');
      $("#image_title").val( myDontationDesc );
     $("#delete_confirm_form").attr("action", "{{ url_for('donors.delete') }}" + myDonationId);
+});
+*/
 });
 
 </script>
