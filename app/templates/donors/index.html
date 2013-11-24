@@ -86,6 +86,81 @@
 </div>
 
 
+
+<div class="row">   
+    <div class="large-12 small-12 columns">
+        <table>
+          <thead>
+            <tr>    
+                <th width="150" class="left"><label><b>Thumbnail</b></label></th>
+                <th width="120" class="left"><label><b>Organization</b></label></th>
+                <th width="50" class="left"><label><b>Description</b></label></th>
+                <th width="50" class="left"><label><b>Date</b></label></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in donations %}
+            <tr>
+                <td width="150" class="left th">
+                    <img src="{{ url_for('donors.uploads', filename=row.filename) }}"/>      
+                </td>
+                <td width="120" class="left"><label>{{ row.organization }}</label></th>
+                <td width="50" class="left"><label>{{ row.description }}</label></th>
+                <td width="50" class="left"><label>{{ row.modified|strftime }}</label></th>   
+                <td class="left">
+                    <ul class="inline-list">
+                      <li><a href="#" data-reveal-id="PreviewImage" class="small button preview_button"
+                            data-id ="{{ row.id }}"
+                            data-title ="{{ row.description }}"
+                            data-urlpath ="{{ url_for('donors.uploads', filename=row.filename) }}"
+                            data-toggle="modal">Preview</a></li>
+                      <li><a href="#" data-reveal-id="DeleteConfirmation" class="small alert button delete_confirmation" 
+                            data-id ="{{ row.id }}"
+                            data-title ="{{ row.description }}"
+                            data-toggle="modal">Delete</a></li>
+                    </ul>
+                </td>
+            </tr>
+            {% endfor %}  
+          </tbody>
+        </table>
+    <div>
+</div>
+
+<div id="PreviewImage" class="modal reveal-modal small modal-body">
+    <div class="row">
+        <div class="large-12 columns">
+            <h6>Receipt for:&nbsp;<output id="image_title1" value="" /></h6>
+            <img id="image_url" src="" />   
+            <br>
+            <br>
+            <a href="{{ url_for('donors.index') }}" class="small alert button">Close</a>
+        </div>
+        <a class="close-reveal-modal">&#215;</a>
+    </div>
+</div>
+
+<div id="DeleteConfirmation" class="modal reveal-modal small modal-body">
+    <fieldset>
+        <form id="delete_confirm_form" action="" method="POST">
+            <div class="large-12 columns">
+                <div class="row">
+                    <label>Are you sure that you want to <b>delete</b> image "<output id="image_title"></output>"?</label>
+                </div>
+                <br>
+                <div class="row">
+                    <ul class="inline-list">
+                        <li><input type="hidden" name="_method" value="DELETE" /></li>
+                        <li><input type="submit" value="Delete" class="small alert button" /></li> 
+                        <li><a href="{{ url_for('donors.delete') }}" type="submit" class="small success button">Cancel</a></li>
+                    </ul>
+                </div>
+            </div>
+        </form>
+    </fieldset>
+    <a class="close-reveal-modal">&#215;</a>
+</div>
+
 {% endblock body %}
 
 {% block js %}
