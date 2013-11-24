@@ -14,13 +14,16 @@ class Donation(Base):
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
     organization = Column(String(60))
+    frequency = Column(String(60))
+    recurring_number = Column (String(2))
     description = Column(String(60))
     filename = Column(String(100))
     amount = Column(String(30))
+    payment_type = Column(String(30))
+    receipt = Column(Boolean)
     created = Column(DateTime, default=datetime.now)
     modified = Column(DateTime, default=datetime.now, onupdate=datetime.now)
     user = relationship("User", backref="donations")
-    organization = relationship("organization", backref="donations")
 
     def __init__(self):
         pass

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block body %}
+{% from "forms/macros.html" import edit_field %}
+
+<br>
+<div class="row">
+    <div class="large-5 large-centered small-12 small-centered columns">
+        <h6>Register Pledges:</h6>
+        <br>
+    </div>
+</div>
+<form action="" method="post" name="simple" enctype="multipart/form-data">
+<div class="row">
+    <div class="large-5 large-centered small-12 small-centered columns">
+        {{ form.hidden_tag() }}             
+        {{ edit_field(form.organization) }}
+        {{ edit_field(form.description) }}
+        {{ edit_field(form.frequency) }}
+        {{ edit_field(form.amount) }}
+    </div>
+</div>
+<div class="row">
+    <div class="large-5 large-centered small-12 small-centered columns">
+        <ul class="inline-list">
+            <li><button class="small success button" type="submit" onclick="">Upload</button></li>
+            <li><a href="{{ url_for('donors.index') }}" class="small alert button">Cancel</a></li>
+        </ul>
+    </div>
+</div>
+</form>
+
+{% endblock %}
+
+{% block js %}
+
+<script>
+
+/* Dynamic show of keyword block */
+$(document).ready(function() {
+    $("#pmt_frequency").change(function(){
+      $('#cat1, #cat2, #cat3').hide();
+      $('#cat' + $(this).val()).show();
+    });
+    $('#cat1, #cat2, #cat3').hide();
+    cat_val = $("#carousel_category").val();
+    $('#cat' + cat_val).show();
+});
+
+</script>
+
+{% endblock js %}

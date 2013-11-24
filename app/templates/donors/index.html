@@ -2,6 +2,121 @@
 {% block body %}
 {% from "forms/macros.html" import edit_field %}
 
-<h1>Donor Index Page</h1>
+<style>
+
+.nivo-caption {
+    position:absolute;
+    left:0px; /* x offset position */
+    top:0px; /* y offset position */
+    overflow:hidden;
+    background:none;
+    font-family:Helvetica, Arial, Sans-Serif;
+    color:#fff;
+    font-weight:bold;
+    font-size:40px;
+    line-height:44px;
+    text-align:left;
+    text-transform:uppercase; /* converts text to UPPERCASE */
+    z-index:8;
+}
+.nivo-caption a {
+    display:inline !important;
+}
+
+.nivo-caption1 {
+    margin-left:25%;
+    margin-top:5px;
+    width:500px;
+    background:black;
+    font-size:100%;
+    line-height:120%;
+}
+
+.nivo-caption2 {
+    margin-left:230px;
+    margin-top:10px;
+    width:350px;
+    background:black;
+    font-size:100%;
+    line-height:120%;
+}
+
+.nivo-caption3 {
+    margin-left:10px;
+    margin-top:100px;
+    background:black;
+    width:350px;
+    font-size:100%;
+    line-height:120%;
+}
+
+</style>
+
+<div class="row">
+    <div class="large-12 columns">
+        <div class="slider-wrapper theme-default">
+            <div class="ribbon"></div>
+            <div id="slider" class="nivoSlider">
+                <img src="{{ url_for('static', filename='img/slides/grace.png') }}" style="max-width:400px; max-height:275px;" title="#htmlcaption1" alt="" />
+                <a href="http://dev7studios.com">
+                <img src="{{ url_for('static', filename='img/slides/haiyan.png') }}" style="max-width:400px; max-height:275px;" alt="" title="#htmlcaption2" /></a>
+                <img src="{{ url_for('static', filename='img/slides/midwest.png') }}" style="max-width:400px; max-height:275px;" title="#htmlcaption3" alt="" />
+            </div>
+            <div id="htmlcaption1" style="display:none">
+                 <div class="nivo-caption1" ></div>
+            </div>
+            <div id="htmlcaption2" style="display:none">
+                <div class="nivo-caption2" ></div>
+            </div>
+            <div id="htmlcaption3" style="display:none">
+                <div class="nivo-caption3" ></div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<div class="row">
+    <div class="large-12 columns">
+        <ul class="inline-list">
+            <li><a href="{{ url_for('donors.create') }}" class="small success button">Register Donations</a></li>
+            <li><a href="{{ url_for('donors.pledging') }}" class="small success button">Register Pledges</a></li>
+        </ul>
+    </div>
+</div>
+
 
 {% endblock body %}
+
+{% block js %}
+
+<script>
+
+$(window).load(function() {
+    $('#slider').nivoSlider({
+        effect: 'fade',               // Specify sets like: 'fold,fade,sliceDown'
+        slices: 15,                     // For slice animations
+        boxCols: 8,                     // For box animations
+        boxRows: 4,                     // For box animations
+        animSpeed: 500,                 // Slide transition speed
+        pauseTime: 3000,                // How long each slide will show
+        startSlide: 0,                  // Set starting Slide (0 index)
+        directionNav: true,             // Next & Prev navigation
+        controlNav: false,               // 1,2,3... navigation
+        controlNavThumbs: false,        // Use thumbnails for Control Nav
+        pauseOnHover: true,             // Stop animation while hovering
+        manualAdvance: false,           // Force manual transitions
+        prevText: 'Prev',               // Prev directionNav text
+        nextText: 'Next',               // Next directionNav text
+        randomStart: false,             // Start on a random slide
+        beforeChange: function(){},     // Triggers before a slide transition
+        afterChange: function(){},      // Triggers after a slide transition
+        slideshowEnd: function(){},     // Triggers after all slides have been shown
+        lastSlide: function(){},        // Triggers when last slide is shown
+        afterLoad: function(){}         // Triggers when slider has loaded
+    });
+});
+
+</script>
+
+{% endblock js %}

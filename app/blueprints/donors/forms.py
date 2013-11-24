@@ -4,8 +4,7 @@ from wtforms.validators import Required, EqualTo, Email
 
 
 class DonationUploadForm(Form):
-    organization = SelectField('organization:', choices=[('1', "Other"), ('2', "United Health"), ('3', "Austin Goodwill"), ('4', "ASGA Austin")], default='1')
-    description = TextField('Description:', [validators.Required()])
+    organization = SelectField('Organization:', choices=[('1', "Other"), ('2', "United Health"), ('3', "Austin Goodwill"), ('4', "ASGA Austin")], default='1')
     frequency = SelectField('Frequency:', choices=[('1', "One-off"), ('2', "Recurring")], default='1')
     recurring_number = TextField('Number Per Year')
     amount = TextField('Amount', [validators.Required()])
@@ -13,3 +12,9 @@ class DonationUploadForm(Form):
     description = TextField('Description:', [validators.Required()])
     upload_file = FileField('Choose image file (max 1MB):')
     receipt = BooleanField('Receipt:')
+
+class PledgingForm(Form):
+    organization = SelectField('Organization:', choices=[('1', "Other"), ('2', "United Health"), ('3', "Austin Goodwill"), ('4', "ASGA Austin")], default='1')
+    frequency = SelectField('Frequency:', choices=[('1', "One-off"), ('2', "Recurring")], default='1')
+    amount = TextField('Amount', [validators.Required()])
+    description = TextField('Description:', [validators.Required()])

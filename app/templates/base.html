@@ -33,7 +33,7 @@
 <nav class="top-bar" data-options="is_hover:true">
   <ul class="title-area">
     <!-- Title Area -->
-      <a href="http://givn.us"><img style="height:auto; width:auto; max-width:50px; max-height:50px;" src="{{ url_for('static', filename='img/givn_only.png') }}" class="img resize" style="margin: 4px 4px 4px;"/></a><br>
+      <a href="http://givn.us"><img style="height:auto; width:auto; max-width:50px; max-height:50px;" src="{{ url_for('static', filename='img/givn_black_bkgd.png') }}" style="margin: 4px 4px 4px;"/></a><br>
     <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
     <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
   </ul>
@@ -45,7 +45,7 @@
       <li class="divider"></li>
          <li class="active"><a href="#">{{ current_user.username }}</a></li>
       <li class="divider"></li> 
-         <li class="active"><a href="{{ url_for('donors.index') }}">Manage Donations</a></li>
+         <li class="active"><a href="{{ url_for('donors.index') }}">Dashboard</a></li>
       <li class="divider"></li>
     {% endif %}      
     </ul>
@@ -58,17 +58,12 @@
           <li><a href="{{ url_for('auth.settings', user_id=current_user.id) }}">Account Settings</a></li>  
       <li class="divider"></li>
       {% endif %}
-      <li class="divider"></li>
       <li class="divider show-for-small"></li>
         {% if current_user.is_authenticated() %}
       <li class="has-form">
           <a class="success button" href="{{ url_for('auth.logout') }}">Logout</a>
       </li>    
         {% else %}
-      <li class="has-form">
-          <a class="success button" href="{{ url_for('auth.register') }}">Register</a>
-      </li>    
-        <li class="divider"></li>
       <li class="has-form">
           <a class="success button" href="{{ url_for('auth.login') }}">Login</a>
       </li>    
