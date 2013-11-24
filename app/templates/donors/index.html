@@ -82,7 +82,7 @@
 </div>
 <div class="row">
     <div class="large-12 columns">
-<img src="{{ url_for('static', filename='img/dashboard.png') }}" style="max-width:1034px; max-height:731px;" alt="" />
+<img src="{{ url_for('static', filename='img/dashboard.png') }}" style="max-width:980px; max-height:1263px;" alt="" />
     </div>
 </div>
 <br>
@@ -104,14 +104,14 @@
               {% if row.type == 2 %}   
             <tr>
                 <td width="150" class="left th">
-                    <img src="{{ url_for('donors.uploads', filename=row.filename, _external=True) }}"/>      
+                    <img src="{{ url_for('static', filename='uploads/'+row.filename, _external=True) }}"/>      
                 </td>
                 <td width="120" class="left"><label>{{ row.organization }}</label></th>
                 <td width="120" class="left"><label>{{ row.description }}</label></th>
                 <td width="100" class="left"><label>{{ row.modified|strftime }}</label></th>   
                 <td class="left">
                     <ul class="inline-list">
-                      <li><a href="#" data-reveal-id="PreviewImage" class="small button preview_button"
+                      <li><a href="#" data-reveal-id="PreviewImage" class="small success button preview_button"
                             data-id ="{{ row.id }}"
                             data-description ="{{ row.description }}"
                             data-urlpath ="{{ url_for('donors.uploads', filename=row.filename) }}"
@@ -153,7 +153,7 @@
                 <td width="100" class="left"><label>{{ row.modified|strftime }}</label></td>   
                 <td class="left">
                     <ul class="inline-list">
-                      <li><a href="#" data-reveal-id="PreviewImage" class="small button preview_button"
+                      <li><a href="#" data-reveal-id="PreviewImage" class="small success button preview_button"
                             data-id ="{{ row.id }}"
                             data-description ="{{ row.description }}"
                             data-toggle="modal">Preview</a></li>

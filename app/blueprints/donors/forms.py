@@ -4,7 +4,7 @@ from wtforms.validators import Required, EqualTo, Email
 
 
 class DonationUploadForm(Form):
-    organization = SelectField('Organization:', choices=[('1', "Other"), ('2', "United Health"), ('3', "Austin Goodwill"), ('4', "ASGA Austin")], default='1')
+    organization = SelectField('Organization:', choices=[('Other', "Other"), ('United Health', "United Health"), ('Austin Goodwill', "Austin Goodwill"), ('ASGA Austin', "ASGA Austin")], default='1')
     frequency = SelectField('Frequency:', choices=[('1', "One-off"), ('2', "Recurring")], default='1')
     recurring_number = TextField('Number Per Year')
     amount = TextField('Amount', [validators.Required()])
