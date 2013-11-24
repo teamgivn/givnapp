@@ -5,6 +5,7 @@ from flask.ext.login import current_user, login_user, logout_user
 from flask.ext.mail import Message
 from app.helpers import login_required
 from app import db, login_manager
+from .models import Donation
 from .forms import DonationUploadForm, PledgingForm
 
 donors = Blueprint(
@@ -30,48 +31,3 @@ def pledging():
     error = None
     form=PledgingForm()
     return render_template('donors/pledging.html', form=form, error=error)
-
-@images.errorhandler(413)
-def error_handler_413(e):
-    return render_template('images/413.html'), 413
-
-@images.route('/', methods=['GET', 'POST'])
-@login_required
-def index():
-    form = DonationUploadForm()
-    if request.method == 'POST' and form.validate_on_submit():
-        description = form.description.data
-        file = form.upload_file.data
-        if file and allowed_file(file.filename):
-            filename = current_user.username + '_' + secure_filename(file.filename)
-            file_content = file.read()
-            image_filename = cdn_upload_file(current_user.cdn_folder_name, filename, file_content)
-            img_response = requests.get(current_user.cdn_folder_uri + filename)
-            img = PIL_Image.open(StringIO(img_response.content))
-#            file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
-            donation = Donation()
-            donation.title = title
-            donation.filename = filename
-            donation.user_id = current_user.id
-            db.session.add(image)
-            db.session.commit()
-            return redirect(url_for('.index'))
-    donations = db.session.query(Donation).filter(Donation.user_id == current_user.id)
-    return render_template('images/index.html', donors=donors, form=form)
-
-@images.route('/delete/', methods=['POST'])
-@images.route('/delete/<id>', methods=['POST'])
-@login_required
-def delete_file(id=None):
-    """Delete an uploaded file."""
-    donor = db.session.query(Donor).get(id)
-    if donor and donor.filename:
-        try:
-            cdn_delete_file(current_user.cdn_folder_name, image.filename)
-#            os.remove(image.filename)
-        except:
-            pass
-        db.session.delete(image)
-        db.session.commit()
-    return redirect(url_for('.index'))
-
