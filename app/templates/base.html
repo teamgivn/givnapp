@@ -60,13 +60,19 @@
       {% endif %}
       <li class="divider"></li>
       <li class="divider show-for-small"></li>
-      <li class="has-form">
         {% if current_user.is_authenticated() %}
+      <li class="has-form">
           <a class="success button" href="{{ url_for('auth.logout') }}">Logout</a>
-        {% else %}
-          <a class="success button" href="{{ url_for('auth.login') }}">Login</a>
-        {% endif %}
       </li>    
+        {% else %}
+      <li class="has-form">
+          <a class="success button" href="{{ url_for('auth.register') }}">Register</a>
+      </li>    
+        <li class="divider"></li>
+      <li class="has-form">
+          <a class="success button" href="{{ url_for('auth.login') }}">Login</a>
+      </li>    
+        {% endif %}
     </ul>
   </section>
 </nav>
