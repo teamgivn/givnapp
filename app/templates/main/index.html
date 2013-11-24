@@ -3,32 +3,8 @@
 
 <style>
 
-.nivo-caption {
-    position:absolute;
-    left:0px; /* x offset position */
-    top:0px; /* y offset position */
-    overflow:hidden;
-    background:none;
-    font-family:Helvetica, Arial, Sans-Serif;
-    color:#fff;
-    font-weight:bold;
-    font-size:40px;
-    line-height:44px;
-    text-align:left;
-    text-transform:uppercase; /* converts text to UPPERCASE */
-    z-index:8;
-}
-.nivo-caption a {
-    display:inline !important;
-}
-
-.nivo-caption1 {
-    margin-left:25%;
-    margin-top:5px;
-    width:500px;
-    background:black;
-    font-size:100%;
-    line-height:120%;
+.verticalLine {
+    border-left: thin solid #000000;
 }
 
 </style>
@@ -37,14 +13,40 @@
 <br>
 <div class="row">
     <div class="large-12 columns">
-            <div>
-                <img src="{{ url_for('static', filename='img/tax_receipt.png') }}" title="#htmlcaption1" alt="" />
-            </div>
-            <div id="htmlcaption1" style="display:none">
-                 <div class="nivo-caption1">Take care of your donation receipts?</div>
-            </div>
+        <div>
+            <img src="{{ url_for('static', filename='img/tax_receipt.png') }}" title="#htmlcaption1" alt="" />
+        </div>
+        <div id="htmlcaption1" style="display:none">
+             <div class="nivo-caption1">Take care of your donation receipts?</div>
         </div>
     </div>
 </div>
+<br>
+<br>
+<br>
+<div class="row">
+    <div class="large-6 columns">
+        <div class="right">
+            <a href="{{ url_for('main.about') }}"><h3><u>Learn more about us</u></h3></a>
+        </div>
+    </div>
+    <div class="large-6 columns">
+        <div class="large-12 columns verticalLine">
+                <a href="{{ url_for('auth.register') }}" class="medium success button">Sign-Up</a>
+        </div>
+        <br>
+        <br>
+        <br>
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+
 
 {% endblock %}

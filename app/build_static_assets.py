@@ -8,6 +8,11 @@ common_css = Bundle(
     'css/vendor/foundation.css',
     'css/vendor/image-picker.css',
     'css/app.css',
+    'css/vendor/nivo-slider.css',
+    'css/vendor/nivo-slider-themes-bar.css',
+    'css/vendor/nivo-slider-themes-dark.css',
+    'css/vendor/nivo-slider-themes-default.css',
+    'css/vendor/nivo-slider-themes-light.css',
     output='public/css/common.css'
     )
 
@@ -22,6 +27,7 @@ common_js = Bundle(
     'js/vendor/image-picker.js',
     'js/vendor/jquery.ae.image.resize.js',
     'js/vendor/d3.v3.js',
+    'js/vendor/jquery.nivo.slider.pack.js',
     'js/app.js',
     output='public/js/common.js'
     )

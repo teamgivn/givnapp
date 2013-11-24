@@ -35,7 +35,7 @@ def get_activation_link(user):
 @auth.route('/login/', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated():
-            return redirect(url_for('orgs.index'))
+            return redirect(url_for('donors.index'))
     form = LoginForm()
     error = None
     if request.method == 'POST' and form.validate_on_submit():
@@ -44,7 +44,7 @@ def login():
         user, authenticated = User.authenticate(db.session.query, username, password)
         if authenticated:
             login_user(user)
-            return redirect(url_for('orgs.index'))
+            return redirect(url_for('donors.index'))
         else:
             error = 'Incorrect username or password'
     return render_template('auth/login.html', form=form, error=error)
