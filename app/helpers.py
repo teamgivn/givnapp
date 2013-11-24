@@ -22,3 +22,7 @@ def send_email(recipients, subject, body):
     with current_app.app_context():
         mail.send(msg)
         return True
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1] in current_app.config['ALLOWED_EXTENSIONS']

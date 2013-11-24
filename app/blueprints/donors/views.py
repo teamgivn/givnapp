@@ -1,11 +1,14 @@
+import os
 from flask import Blueprint, render_template, session, redirect, url_for, request, abort, flash
 from flask import current_app
 from itsdangerous import URLSafeSerializer, BadSignature
+from werkzeug import secure_filename
 from flask.ext.login import current_user, login_user, logout_user
 from flask.ext.mail import Message
-from app.helpers import login_required
+from app.helpers import login_required, allowed_file
 from app import db, login_manager
 from .forms import DonationUploadForm, PledgingForm
+from .models import Donation
 
 donors = Blueprint(
     'donors', 
@@ -23,6 +26,18 @@ def index():
 def create():
     error = None
     form=DonationUploadForm()
+    if request.method == 'POST' and form.validate_on_submit():
+        file = request.files['upload_file']
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
+            donation = Donation()
+            form.populate_obj(donation)            
+            donation.filename = filename
+            donation.user_id = current_user.id
+            db.session.add(donation)
+            db.session.commit()
+            return redirect(url_for('donors.index'))
     return render_template('donors/create.html', form=form, error=error)
 
 @donors.route('/pledging/', methods=['GET', 'POST'])
@@ -31,13 +46,13 @@ def pledging():
     form=PledgingForm()
     return render_template('donors/pledging.html', form=form, error=error)
 
-@images.errorhandler(413)
+@donors.errorhandler(413)
 def error_handler_413(e):
     return render_template('images/413.html'), 413
 
-@images.route('/', methods=['GET', 'POST'])
+@donors.route('/test', methods=['GET', 'POST'])
 @login_required
-def index():
+def test_index():
     form = DonationUploadForm()
     if request.method == 'POST' and form.validate_on_submit():
         description = form.description.data
@@ -59,8 +74,8 @@ def index():
     donations = db.session.query(Donation).filter(Donation.user_id == current_user.id)
     return render_template('images/index.html', donors=donors, form=form)
 
-@images.route('/delete/', methods=['POST'])
-@images.route('/delete/<id>', methods=['POST'])
+@donors.route('/delete/', methods=['POST'])
+@donors.route('/delete/<id>', methods=['POST'])
 @login_required
 def delete_file(id=None):
     """Delete an uploaded file."""
