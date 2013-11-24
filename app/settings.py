@@ -14,7 +14,7 @@ class Config(object):
     MAIL_SENDER = 'teamgivn@gmail.com'
     #Upload of files
     ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'JPEG', 'GIF', 'PNG', 'JPG'])
-    UPLOAD_FOLDER = BASE_DIR + '/uploads'
+    UPLOAD_FOLDER = BASE_DIR + '/static/uploads'
 
 class ProdConfig(Config):
     SECRET_KEY = 'givn - The next big startup'
