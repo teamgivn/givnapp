@@ -13,7 +13,7 @@
           		{{ edit_field(form.username) }}
 			    {{ edit_field(form.password, placeholder="Enter your password") }}
 			    {{ edit_field(form.rememberme) }}
-			    <button class="button small" type="submit">Login</button>
+			    <button class="small success button" type="submit">Login</button>
 			</form>
 			<label>First time user?  Register <a href="{{ url_for('auth.register') }}" >here</a>
 		</fieldset>

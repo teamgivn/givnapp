@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block body %}
+{% from "forms/macros.html" import edit_field %}
+
+<br>
+<div class="row">
+    <div class="large-5 large-centered small-12 small-centered columns">
+            <h6>Login:</h6>
+            <br>
+            <form action="" method="post" name="simple" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}             
+                {{ edit_field(form.organization) }}
+                {{ edit_field(form.description) }}
+                {{ edit_field(form.frequency) }}
+                {{ edit_field(form.recurring_number) }}
+                {{ edit_field(form.amount) }}
+                {{ edit_field(form.payment_type) }}
+                {{ edit_field(form.receipt) }}
+                {{ edit_field(form.upload_file) }}
+                <button class="small success button" type="submit">Login</button>
+            </form>
+    </div>
+<div>
+{% endblock %}
+
+

@@ -3493,7 +3493,7 @@ label.error {
         .top-bar-section ul li .js-generated {
           display: none; }
     .top-bar-section li.hover > a:not(.button) {
-      background: white;
+      background: black;
       color: white; }
     .top-bar-section li a:not(.button) {
       padding: 0 15px;

@@ -62,9 +62,9 @@
       <li class="divider show-for-small"></li>
       <li class="has-form">
         {% if current_user.is_authenticated() %}
-          <a class="button" href="{{ url_for('auth.logout') }}">Logout</a>
+          <a class="success button" href="{{ url_for('auth.logout') }}">Logout</a>
         {% else %}
-          <a class="button" href="{{ url_for('auth.login') }}">Login</a>
+          <a class="success button" href="{{ url_for('auth.login') }}">Login</a>
         {% endif %}
       </li>    
     </ul>
